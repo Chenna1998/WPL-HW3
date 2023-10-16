@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Store</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+    <header>
+        
+        <img src="logo.png" alt="logo" class="logo">
+        <h1>Varsha Grocery</h1>
+    </header>
+        <!-- Navigation Bar -->
+            <ul>
+                <li><a href="grocery.html">Home</a></li>
+                <li><a href="fresh.html"class="active">Fresh Products</a></li>
+                <li><a href="frozen.html">Frozen</a></li>
+                <li><a href="pantry.html">Pantry</a></li>
+                <li><a href="breakfast.html">Breakfast and Cereal</a></li>
+                <li><a href="baking.html">Baking</a></li>
+                <li><a href="snacks.html">Snacks</a></li>
+                <li><a href="candy.html">Candy</a></li>
+                <li><a href="specialty.html">Specialty Shops</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="myaccount.html">My Account</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+       <div class="container">
+            <div class="side">
+               <h2>List of Prodcut Categories</h2>
+               <ol>
+                <li>Shop All</li><br>
+                <li>Vegetables</li><br>
+                <li>Fruits</li><br>
+                <li>Pre-Cut Fruits</li><br>
+                <li>Flowers</li><br>
+                <li>Salsa</li><br>
+                <li>Dips</li><br>
+                <li>Season Produce</li><br>
+                <li>New Items</li><br>
+                <li>Rollbacks</li><br>
+               </ol>
+               <p><b>Date and Time</b></p>
+                <div id="datetime"></div>
+            </div>
+            <h3 class="heading">Fresh Products</h3>
+            <div class="maincontent">
+                <select id="categories">
+                    <option value="all">All</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="pre cut fruits">Pre cut Fruits</option>
+                    <option value="flowers">Flowers</option>
+                    <option value="salsa">Salsa</option>
+                    <option value="dips">Dips</option>
+                    <option value="season produce">Season Produce</option>
+                    <option value="new items">New Items</option>
+                    <option value="rollbacks">Rollbacks</option>
+                  </select>
+                <div class="products">
+                    <div class="product" data-category="vegetables">
+                        <!-- Vegetable product details -->
+                        <img src="broccoli.jpg" alt="Broccoli" class="prdct">
+                        <h4>Broccoli</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="beans.jpg" alt="beans" class="prdct">
+                        <h4>Beans</h4>
+                        <p>Price: $8.49</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="cauliflower.jpg" alt="cauliflower" class="prdct">
+                        <h4>Cauliflower</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="bellpepper.jpg" alt="bellpepper" class="prdct">
+                        <h4>Bell Pepper</h4>
+                        <p>Price: $8.49</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="carrots.jpg" alt="carrots" class="prdct">
+                        <h4>Carrots</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="tomato.jpg" alt="tomato" class="prdct">
+                        <h4>Tomato</h4>
+                        <p>Price: $8.49</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product" data-category="fruits">
+                        <!-- Fruits product details -->
+                        <img src="apple.jpg" alt="apple" class="prdct">
+                        <h4>Apple</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="orange.jpg" alt="orange" class="prdct">
+                        <h4>Orange</h4>
+                        <p>Price: $8.49</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="pineapple.jpg" alt="pineapple" class="prdct">
+                        <h4>Pineapple</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+
+                    <div class="product" data-category="pre cut fruits">
+                        <!-- Pre Cut Fruits product details -->
+                        <img src="kiwi.jpg" alt="kiwi" class="prdct">
+                        <h4>Kiwi</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="melon.jpg" alt="melon" class="prdct">
+                        <h4>Melon</h4>
+                        <p>Price: $8.49</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="banana.jpg" alt="banana" class="prdct">
+                        <h4>Banana</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                    </div>
+
+                    <div class="product" data-category="flowers">
+                        <!-- Flowers product details -->
+                        <img src="rose.jpg" alt="rose" class="prdct">
+                        <h4>Rose</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    <div class="product" data-category="salsa">
+                        <!-- Salsa product details -->
+                        <img src="salsa.jpg" alt="rose" class="prdct">
+                        <h4>Salsa</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                    
+                    <div class="product" data-category="flowers">
+                        <!-- Dips product details -->
+                        <img src="dips.jpg" alt="dips" class="prdct">
+                        <h4>Dips</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+
+                    <div class="product" data-category="Season Produce">
+                        <!-- Season Produce product details -->
+                        <img src="apricots.jpg" alt="apricots" class="prdct">
+                        <h4>Apricots</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="grapes.jpg" alt="grapes" class="prdct">
+                        <h4>Grapes</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+
+                    <div class="product" data-category="New Items">
+                        <!-- New Items product details -->
+                        <img src="paneer.jpg" alt="paneer" class="prdct">
+                        <h4>Paneer</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        <img src="mushrooms.jpg" alt="mushrooms" class="prdct">
+                        <h4>Mushrooms</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+
+                    <div class="product" data-category="New Items">
+                        <!-- Rollbacks product details -->
+                        <img src="rollabacks.jpg" alt="rollbacks" class="prdct">
+                        <h4>Rollbacks</h4>
+                        <p>Price: $10.99</p>
+                        <button class="add-to-cart">Add to Cart</button>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    <footer>
+        <img src="logo.png" alt="logo" class="logo2"><p>All Contents &copy; 2023 The VG Co. All Rights Reserved</p>
+        <p><a href="https://www.kroger.com/i/terms/accessibility">Accessibility Statement</a>. If you are using a screen reader and having difficulty with this website, please call <u>513-918-7803</u>.
+        </p>
+        <table>
+            <tr>
+                <td><p><i>Let's Connect</i></p></td>
+                <td><a href="https://www.facebook.com/"><img src="https://cdn4.iconfinder.com/data/icons/various-icons-2/476/Facebook.png" alt="Facebook" class="image"></a></td>
+                <td><a href="https://www.instagram.com/"><img src="https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049581.jpg" alt="Instagram" class="image"></a></td>
+                <td><a href="https://www.youtube.com/"><img src="https://www.freepnglogos.com/uploads/youtube-logo-png-images-0.png" alt="Youtube" class="image"></a></td>
+                <td><a href="https://www.twitter.com/"><img src="https://logos-world.net/wp-content/uploads/2020/04/Twitter-Symbol.png" alt="Twitter" class="image"></a></td>
+            </tr>
+        </table>
+        <p>First Name: Varsha Sai</p>
+        <p>Last Name: Kuppala</p>
+        <p>NetID: KXV210037</p>
+        </footer>
+    
+    <script src="myscript.js"></script>
+</body>
+</html>

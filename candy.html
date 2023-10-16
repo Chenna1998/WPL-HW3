@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Store</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+    
+    <header>
+        
+        <img src="logo.png" alt="logo" class="logo">
+        <h1>Varsha Grocery</h1>
+    </header>
+        <!-- Navigation Bar -->
+            <ul>
+                <li><a href="grocery.html">Home</a></li>
+                <li><a href="fresh.html">Fresh Products</a></li>
+                <li><a href="frozen.html" >Frozen</a></li>
+                <li><a href="pantry.html">Pantry</a></li>
+                <li><a href="breakfast.html">Breakfast and Cereal</a></li>
+                <li><a href="baking.html">Baking</a></li>
+                <li><a href="snacks.html" >Snacks</a></li>
+                <li><a href="candy.html" class="active">Candy</a></li>
+                <li><a href="specialty.html">Specialty Shops</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="myaccount.html">My Account</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+       <div class="container">
+            <div class="side">
+               <p>Enjoy the best Candy's</p>
+               <p><b>Date and Time</b></p>
+                <div id="datetime"></div>
+            </div>
+            <div class="maincontent">     
+                <div>
+                    <label for="candySearch">Search for Candy:</label>
+                    <input type="text" id="candySearch">
+                    <span id="errorMessage" style="color: red;"></span>
+                </div>
+            
+                <div id="productsDisplay">
+                    <!-- All products will be hidden initially -->
+                </div>
+            
+                <!-- Hidden products list -->
+                <div id="allProducts" style="display: none;">
+                    <div class="product" data-candy-name="Almond Chocolate" data-inventory="20" data-original-inventory="20">
+                        <img src="chocolatealmond.jpg" alt="Almond Chocolate" class="prdct">
+                        <h4>Almond Chocolate</h4>
+                        <p>Price: $3.99</p>
+                        <input type="number" class="product-quantity" min="1" value="1"> <!-- max set to the inventory count -->
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                    </div>
+                    <!-- ... [rest of the candy products] ... -->
+                    <div class="product" data-candy-name="Dark Chocolate" data-inventory="10">
+                        <img src="chocolatealmond.jpg" alt="Dark Chocolate" class="prdct">
+                        <h4>Dark Chocolate</h4>
+                        <p>Price: $4.99</p>
+                        <input type="number" class="product-quantity" min="1" value="1">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                    </div>
+                    <div class="product" data-candy-name="Jelly Candy" data-inventory="15">
+                        <img src="jellycandy.jpg" alt="Jelly Candy" class="prdct">
+                        <h4>Jelly Candy</h4>
+                        <p>Price: $4.99</p>
+                        <input type="number" class="product-quantity" min="1" value="1">
+                        <button class="add-to-cart" onclick="addToCart(this)">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    <footer>
+        <img src="logo.png" alt="logo" class="logo2"><p>All Contents &copy; 2023 The VG Co. All Rights Reserved</p>
+        <p><a href="https://www.kroger.com/i/terms/accessibility">Accessibility Statement</a>. If you are using a screen reader and having difficulty with this website, please call <u>513-918-7803</u>.
+        </p>
+        <table>
+            <tr>
+                <td><p><i>Let's Connect</i></p></td>
+                <td><a href="https://www.facebook.com/"><img src="https://cdn4.iconfinder.com/data/icons/various-icons-2/476/Facebook.png" alt="Facebook" class="image"></a></td>
+                <td><a href="https://www.instagram.com/"><img src="https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049581.jpg" alt="Instagram" class="image"></a></td>
+                <td><a href="https://www.youtube.com/"><img src="https://www.freepnglogos.com/uploads/youtube-logo-png-images-0.png" alt="Youtube" class="image"></a></td>
+                <td><a href="https://www.twitter.com/"><img src="https://logos-world.net/wp-content/uploads/2020/04/Twitter-Symbol.png" alt="Twitter" class="image"></a></td>
+            </tr>
+        </table>
+        <p>First Name: Varsha Sai</p>
+        <p>Last Name: Kuppala</p>
+        <p>NetID: KXV210037</p>
+        </footer>
+    
+   <script>
+    
+    document.getElementById('candySearch').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+  searchCandy();
+}
+});
+
+function searchCandy() {
+  const candyInput = document.getElementById('candySearch').value.trim();
+  const errorMessage = document.getElementById('errorMessage');
+  const productsDisplay = document.getElementById('productsDisplay');
+  const allProducts = document.getElementById('allProducts').children;
+
+  // Clear previously displayed products
+  productsDisplay.innerHTML = '';
+
+  // If the search box is empty, exit the function
+  if (!candyInput) {
+    errorMessage.textContent = '';
+    return;
+  }
+
+  // Check if the input contains numbers
+  if (/\d/.test(candyInput)) {
+    errorMessage.textContent = 'Please enter a valid candy name without numbers!';
+    return;
+  } else {
+    errorMessage.textContent = ''; // Clear the error message
+  }
+
+  // Check for matching candies and display them
+  for (let product of allProducts) {
+    if (product.getAttribute('data-candy-name').toLowerCase().includes(candyInput.toLowerCase())) {
+      // Clone the product node and append to productsDisplay
+      productsDisplay.appendChild(product.cloneNode(true));
+    }
+  }
+
+  // If no products matched the search criteria
+  if (!productsDisplay.hasChildNodes() && candyInput.length > 0) {
+    errorMessage.textContent = 'Candy not available in inventory!';
+  }
+}
+function addToCart(buttonElement) {
+    const productDiv = buttonElement.parentElement;
+    const productName = productDiv.querySelector('h4').textContent;
+    const productPrice = parseFloat(productDiv.querySelector('p').textContent.split('$')[1]);
+    const quantityInput = productDiv.querySelector('.product-quantity');
+    const quantity = parseInt(quantityInput.value);
+    const inventory = parseInt(productDiv.getAttribute('data-inventory'));
+
+    if (isNaN(quantity) || quantity <= 0) {
+        alert("Please enter a valid quantity.");
+        return;
+    }
+
+    // Check if product is already in the cart
+    let productExists = false;
+    let existingQuantityInCart = 0;
+    const currentCartCount = parseInt(localStorage.getItem('cartCount') || "0");
+    for (let i = 0; i < currentCartCount; i++) {
+        if (localStorage.getItem('productName_' + i) === productName) {
+            existingQuantityInCart = parseInt(localStorage.getItem('productQuantity_' + i));
+            productExists = true;
+            break;
+        }
+    }
+
+    // Check if total quantity exceeds inventory
+    if(existingQuantityInCart + quantity > inventory) {
+        alert(`Sorry, there are only ${inventory - existingQuantityInCart} more units of ${productName} available.`);
+        return;
+    }
+
+    // Update cart in local storage
+    if (productExists) {
+        localStorage.setItem('productQuantity_' + currentCartCount, (existingQuantityInCart + quantity).toString());
+    } else {
+        localStorage.setItem('cartCount', currentCartCount + 1);
+        localStorage.setItem('productName_' + currentCartCount, productName);
+        localStorage.setItem('productPrice_' + currentCartCount, productPrice.toString());
+        localStorage.setItem('productQuantity_' + currentCartCount, quantity.toString());
+    }
+
+   // Update the product's inventory in both the displayed list and hidden list
+   const updatedInventory = (inventory - quantity).toString();
+    productDiv.setAttribute('data-inventory', updatedInventory);
+    const allProductsDiv = document.getElementById('allProducts');
+    const originalProduct = Array.from(allProductsDiv.children).find(prod => prod.getAttribute('data-candy-name') === productName);
+    if (originalProduct) {
+        originalProduct.setAttribute('data-inventory', updatedInventory);
+    }
+
+    // Update the inventory in localStorage
+    localStorage.setItem(productName + '_inventory', updatedInventory);
+
+    // Update the maximum value of the quantity input to the updated inventory
+    quantityInput.setAttribute('max', updatedInventory);
+
+    // Handle "Out of Stock" for both displayed and hidden products
+    if (updatedInventory === "0") {
+        const outOfStockDiv = document.createElement('div');
+        outOfStockDiv.textContent = 'Out of Stock';
+        outOfStockDiv.className = 'out-of-stock';
+        productDiv.appendChild(outOfStockDiv);
+        productDiv.querySelector('.add-to-cart').disabled = true;
+
+        const allProductsDiv = document.getElementById('allProducts');
+        const originalProduct = Array.from(allProductsDiv.children).find(prod => prod.getAttribute('data-candy-name') === productName);
+        if (originalProduct) {
+            const originalOutOfStockDiv = outOfStockDiv.cloneNode(true);
+            originalProduct.appendChild(originalOutOfStockDiv);
+            originalProduct.querySelector('.add-to-cart').disabled = true;
+        }
+    }
+
+    alert(`${productName} has been added to the cart.`);
+}
+
+
+   </script>
+</body>
+</html>

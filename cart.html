@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Grocery Store</title>
+    <link rel="stylesheet" type="text/css" href="mystyle.css">
+</head>
+<body>
+    
+    <header>
+        
+        <img src="logo.png" alt="logo" class="logo">
+        <h1>Varsha Grocery</h1>
+    </header>
+        <!-- Navigation Bar -->
+            <ul>
+                <li><a href="grocery.html">Home</a></li>
+                <li><a href="fresh.html">Fresh Products</a></li>
+                <li><a href="frozen.html" >Frozen</a></li>
+                <li><a href="pantry.html">Pantry</a></li>
+                <li><a href="breakfast.html">Breakfast and Cereal</a></li>
+                <li><a href="baking.html">Baking</a></li>
+                <li><a href="snacks.html" >Snacks</a></li>
+                <li><a href="candy.html">Candy</a></li>
+                <li><a href="specialty.html">Specialty Shops</a></li>
+                <li><a href="deals.html">Deals</a></li>
+                <li><a href="myaccount.html">My Account</a></li>c
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contactus.html">Contact Us</a></li>
+                <li><a href="cart.html" class="active">Cart</a></li>
+            </ul>
+       <div class="container">
+            <div class="side">
+               <p>Check all the Items added to the Cart</p>
+               <p><b>Date and Time</b></p>
+                <div id="datetime"></div>
+            </div>
+            <div class="maincontent">     
+                <button id="clearCart">Clear Cart</button>
+            </div>
+        </div>
+    <footer>
+        <img src="logo.png" alt="logo" class="logo2"><p>All Contents &copy; 2023 The VG Co. All Rights Reserved</p>
+        <p><a href="https://www.kroger.com/i/terms/accessibility">Accessibility Statement</a>. If you are using a screen reader and having difficulty with this website, please call <u>513-918-7803</u>.
+        </p>
+        <table>
+            <tr>
+                <td><p><i>Let's Connect</i></p></td>
+                <td><a href="https://www.facebook.com/"><img src="https://cdn4.iconfinder.com/data/icons/various-icons-2/476/Facebook.png" alt="Facebook" class="image"></a></td>
+                <td><a href="https://www.instagram.com/"><img src="https://img.freepik.com/free-psd/3d-icon-social-media-app_23-2150049581.jpg" alt="Instagram" class="image"></a></td>
+                <td><a href="https://www.youtube.com/"><img src="https://www.freepnglogos.com/uploads/youtube-logo-png-images-0.png" alt="Youtube" class="image"></a></td>
+                <td><a href="https://www.twitter.com/"><img src="https://logos-world.net/wp-content/uploads/2020/04/Twitter-Symbol.png" alt="Twitter" class="image"></a></td>
+            </tr>
+        </table>
+        <p>First Name: Varsha Sai</p>
+        <p>Last Name: Kuppala</p>
+        <p>NetID: KXV210037</p>
+        </footer>
+    
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const allProductsDiv = document.getElementById('allProducts');
+    if(allProductsDiv) {
+        for (let product of allProductsDiv.children) {
+            const productName = product.getAttribute('data-candy-name');
+            const storedInventory = localStorage.getItem(productName + '_inventory');
+            if (storedInventory) {
+                product.setAttribute('data-inventory', storedInventory);
+            }
+        }
+    }
+});
+
+document.getElementById('clearCart').addEventListener('click', function() {
+    // Clear all cart-related data from localStorage
+    const cartCount = parseInt(localStorage.getItem('cartCount') || "0");
+    for (let i = 0; i < cartCount; i++) {
+        localStorage.removeItem('productName_' + i);
+        localStorage.removeItem('productPrice_' + i);
+        localStorage.removeItem('productQuantity_' + i);
+    }
+    localStorage.removeItem('cartCount');
+
+    // Reset the inventory for each product to its original value
+    const allProductsDiv = document.getElementById('allProducts');
+    if(allProductsDiv) {
+        for (let product of allProductsDiv.children) {
+            const originalInventory = product.getAttribute('data-original-inventory');
+            product.setAttribute('data-inventory', originalInventory);
+            localStorage.setItem(product.getAttribute('data-candy-name') + '_inventory', originalInventory);
+
+            // Remove any "Out of Stock" overlays
+            const outOfStockDiv = product.querySelector('.out-of-stock');
+            if (outOfStockDiv) {
+                product.removeChild(outOfStockDiv);
+            }
+
+            // Enable the "Add to Cart" button
+            const addToCartButton = product.querySelector('.add-to-cart');
+            if (addToCartButton) {
+                addToCartButton.disabled = false;
+            }
+
+            // Update the maximum value of the quantity input field
+            const quantityInput = product.querySelector('.product-quantity');
+            if (quantityInput) {
+                quantityInput.setAttribute('max', originalInventory);
+            }
+        }
+    }
+
+    // Provide user feedback
+    alert("Cart cleared and inventory reset!");
+
+    // Refresh the current page
+    location.reload();
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const mainContent = document.querySelector('.maincontent');
+    const cartCount = parseInt(localStorage.getItem('cartCount') || "0");
+
+    if (cartCount === 0) {
+        mainContent.innerHTML = '<p>Your cart is empty.</p>';
+        return;
+    }
+
+    let totalAmount = 0; // Initialize total amount
+
+    for (let i = 0; i < cartCount; i++) {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'cart-item';
+
+        const name = document.createElement('p');
+        name.textContent = `Product Name: ${localStorage.getItem('productName_' + i)}`;
+
+        const price = document.createElement('p');
+        const itemPrice = parseFloat(localStorage.getItem('productPrice_' + i));
+        const itemQuantity = parseInt(localStorage.getItem('productQuantity_' + i));
+        const itemTotal = itemPrice * itemQuantity; // Calculate item total
+        totalAmount += itemTotal; // Add to total amount
+        price.textContent = `Price: $${itemTotal.toFixed(2)}`;
+
+        const qty = document.createElement('p');
+        qty.textContent = `Quantity: ${itemQuantity}`;
+
+        itemDiv.appendChild(name);
+        itemDiv.appendChild(price);
+        itemDiv.appendChild(qty);
+        mainContent.appendChild(itemDiv);
+    }
+
+    // Display total amount
+    const totalDiv = document.createElement('div');
+    totalDiv.className = 'cart-total';
+    totalDiv.innerHTML = `<h3>Total Amount: $${totalAmount.toFixed(2)}</h3>`;
+    mainContent.appendChild(totalDiv);
+});
+
+
+   </script>
+</body>
+</html>
